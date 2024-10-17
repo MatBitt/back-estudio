@@ -30,8 +30,6 @@ public class ProdutoService {
     @Transactional
     public Produto cadastrarProduto(@Valid DadosCadastroProduto dados) {
         var produto = new Produto(dados);
-        System.out.println(" ========================================================== PRODUTO ==========================================================");
-        System.out.println(produto);
         repository.save(produto);
         return produto;
     }
