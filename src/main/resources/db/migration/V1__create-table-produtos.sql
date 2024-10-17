@@ -1,9 +1,9 @@
 create table produtos(
 
     id BIGSERIAL not null,
-    login varchar(100) not null UNIQUE,
-    senha varchar(255) not null,
-
+    titulo varchar(255) not null UNIQUE,
+    descricao varchar(255),
+    imagem varchar(255),
+    preco decimal(5,2) not null,
     primary key(id)
-
 );
