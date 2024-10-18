@@ -5,5 +5,6 @@ create table produtos(
     descricao varchar(255),
     imagem varchar(255),
     preco decimal(5,2) not null,
+    categoria varchar(255),
     primary key(id)
 );

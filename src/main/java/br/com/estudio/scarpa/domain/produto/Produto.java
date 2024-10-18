@@ -23,11 +23,13 @@ public class Produto {
     private String descricao;
     private String imagem;
     private BigDecimal preco;
+    private String categoria;
 
     public Produto(DadosCadastroProduto dados) {
         this.titulo = dados.titulo();
         this.descricao = dados.descricao();
         this.imagem = dados.imagem();
         this.preco = dados.preco();
+        this.categoria = dados.categoria().toLowerCase();
     }
 }

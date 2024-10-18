@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastroProduto(
+public record DadosAtualiazacaoProduto(
+        @NotNull Long id,
         @NotBlank String titulo,
         String descricao,
         @NotBlank String imagem,

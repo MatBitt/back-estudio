@@ -1,9 +1,8 @@
 package br.com.estudio.scarpa.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.estudio.scarpa.domain.produto.DadosAtualiazacaoProduto;
 import br.com.estudio.scarpa.domain.produto.DadosCadastroProduto;
 import br.com.estudio.scarpa.domain.produto.Produto;
 import br.com.estudio.scarpa.domain.produto.ProdutoRepository;
@@ -11,7 +10,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -28,24 +26,25 @@ public class ProdutoService {
     }
 
     @Transactional
-    public Produto cadastrarProduto(@Valid DadosCadastroProduto dados) {
+    public Produto cadastrarProduto(DadosCadastroProduto dados) {
         var produto = new Produto(dados);
         repository.save(produto);
         return produto;
     }
 
-    public Page<Produto> listar(Pageable paginacao) {
-        return repository.findAll(paginacao);
+    public Iterable<Produto> listar() {
+        return repository.findAll();
     }
 
     @Transactional
-    public Produto atualizar(Produto dados) {
-        var produto = repository.findById(dados.getId()).orElseThrow(() -> new EntityNotFoundException());
+    public Produto atualizar(DadosAtualiazacaoProduto dados) {
+        var produto = repository.findById(dados.id()).orElseThrow(() -> new EntityNotFoundException());
 
-        produto.setDescricao(dados.getDescricao());
-        produto.setImagem(dados.getImagem());
-        produto.setPreco(dados.getPreco());
-        produto.setTitulo(dados.getTitulo());
+        produto.setDescricao(dados.descricao());
+        produto.setImagem(dados.imagem());
+        produto.setPreco(dados.preco());
+        produto.setTitulo(dados.titulo());
+        produto.setCategoria(dados.categoria().toLowerCase());
 
         repository.save(produto);
 
